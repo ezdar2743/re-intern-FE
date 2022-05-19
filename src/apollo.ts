@@ -35,6 +35,13 @@ export const logUserOut = () => {
   isLoggedInVar(false);
 };
 
+export const addClicked = () => {
+  openAddModalVar(true);
+};
+export const confirmAdd = () => {
+  openAddModalVar(false);
+};
+
 const httpLink = createHttpLink({
   uri: "http://localhost:4000",
 });
