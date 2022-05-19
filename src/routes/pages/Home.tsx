@@ -1,4 +1,4 @@
-import { useReactiveVar } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import styled from "styled-components";
 import { nextMonth, displayMonth, displayYear, preMonth } from "../../apollo";
 import OnlyDevidedLine from "../../components/OnlyDevidedLine";
@@ -33,20 +33,35 @@ const ContentBox = styled.div`
   width: 100%;
   margin: 15px;
 `;
-const TitleBox = styled.div`
-  width: 50%;
+const ThickDevide = styled.div`
+  margin: 20px 0px 30px 0;
+  text-transform: uppercase;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+  background-color: ${(props) => props.theme.borderColor};
+  height: 3px;
 `;
-const TitleText = styled.h1`
-  font-size: 24px;
-  display: flex;
+export const VIEW_MONEY_QUERY = gql`
+  query viewMoney($year: Int!, $month: Int) {
+    viewMoney(year: $year, month: $month) {
+      title
+      amount
+      date
+    }
+  }
 `;
-const NowText = styled.span`
-  font-size: 10px;
-  color: tomato;
+export const CURRENT_USER = gql`
+  query currentUser {
+    currentUser {
+      loginId
+      name
+      email
+    }
+  }
 `;
+
 const Home: React.FC = () => {
   const clickedMonth = useReactiveVar(displayMonth);
   const clickedYear = useReactiveVar(displayYear);
@@ -61,54 +76,9 @@ const Home: React.FC = () => {
     <Container>
       <InnerContainer>
         <ContentBox>
-          <TitleBox>
-            <SvgIcon>
-              <svg
-                onClick={() => preMonth()}
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </SvgIcon>
-
-            {sameThisYM() ? (
-              <TitleText>
-                {`${clickedYear.year}年  ${clickedMonth.month}月  `}
-                <NowText>now!</NowText>
-              </TitleText>
-            ) : (
-              <TitleText>
-                {`${clickedYear.year}年 ${clickedMonth.month}月 `}
-              </TitleText>
-            )}
-            <SvgIcon>
-              <svg
-                onClick={() => nextMonth()}
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </SvgIcon>
-          </TitleBox>
-          <OnlyDevidedLine />
+          <HomeDateSelector />
+          <HomeSummary />
+          <ThickDevide />
         </ContentBox>
       </InnerContainer>
     </Container>
