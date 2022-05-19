@@ -13,11 +13,11 @@ const Btn = styled.button`
     background-color: #3276bc;
   }
 `;
-interface IProps {
+type Props = {
   text: string;
-}
+};
 
-const AuthBtn = ({ text }: IProps) => {
+const AuthBtn = ({ text }: Props) => {
   return <Btn>{text}</Btn>;
 };
 

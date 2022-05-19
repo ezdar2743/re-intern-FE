@@ -9,11 +9,11 @@ const TopBox = styled(AuthBox)`
   justify-content: center;
   padding-bottom: 30px;
 `;
-interface IProps {
+type Props = {
   children: ReactNode;
-}
+};
 
-const AuthTopBox = ({ children }: IProps) => {
+const AuthTopBox = ({ children }: Props) => {
   return <TopBox>{children}</TopBox>;
 };
 

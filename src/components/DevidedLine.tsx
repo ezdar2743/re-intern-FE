@@ -18,11 +18,11 @@ const Line = styled.div`
     color: #8e8e8e;
   }
 `;
-interface IProps {
+type Props = {
   text: string | undefined;
-}
+};
 
-const DevidedLine = ({ text }: IProps) => {
+const DevidedLine = ({ text }: Props) => {
   return (
     <Line>
       <div></div>
