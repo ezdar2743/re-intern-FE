@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { logUserOut } from "../../apollo";
 import SvgIcon from "../SvgIcon";
@@ -44,6 +44,7 @@ const Button = styled.button`
   }
 `;
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <Container>
       <Wrapper>
@@ -95,7 +96,11 @@ const Navbar = () => {
               </svg>
             </SvgIcon>
 
-            <Button onClick={logUserOut}>ログアウト</Button>
+            <Button
+              onClick={() => (logUserOut(), navigate("/", { replace: true }))}
+            >
+              ログアウト
+            </Button>
           </>
         </Col>
       </Wrapper>
