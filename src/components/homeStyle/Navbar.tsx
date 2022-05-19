@@ -1,7 +1,6 @@
-import { useReactiveVar } from "@apollo/client";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { isLoggedInVar, logUserOut } from "../../apollo";
+import { logUserOut } from "../../apollo";
 import SvgIcon from "../SvgIcon";
 
 const Container = styled.header`
@@ -29,17 +28,7 @@ const Logo = styled.svg`
   width: 200px;
   height: 30px;
 `;
-const Icon = styled.svg`
-  cursor: pointer;
-  width: 70px;
-  height: 30px;
-  color: ${(props) => props.theme.mainColor};
-  transition: 1ms ease-in-out;
-  &:hover {
-    transform: scale(1.1);
-    color: #3276bc;
-  }
-`;
+
 const Button = styled.button`
   background-color: ${(props) => props.theme.mainColor};
   border-radius: 4px;
