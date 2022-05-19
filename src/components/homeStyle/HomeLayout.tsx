@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Navbar from "./Navbar";
 
-type Children = {
+type Props = {
   children: React.ReactNode;
 };
 const Content = styled.main`
@@ -11,7 +11,7 @@ const Content = styled.main`
   margin: 45px auto 0;
 `;
 
-const HomeLayout = ({ children }: Children) => {
+const HomeLayout = ({ children }: Props) => {
   return (
     <>
       <Navbar />
