@@ -173,7 +173,7 @@ const HomeAddFoamModal = () => {
       },
       refetchQueries: [VIEW_MONEY_QUERY],
     });
-    confirmAdd();
+    closeModal();
   };
 
   return (
