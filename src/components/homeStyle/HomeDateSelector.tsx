@@ -1,6 +1,6 @@
 import { useReactiveVar } from "@apollo/client";
 import styled from "styled-components";
-import { nextMonth, nowMonth, nowYear, preMonth } from "../../apollo";
+import { nextMonth, displayMonth, displayYear, preMonth } from "../../apollo";
 import OnlyDevidedLine from "../OnlyDevidedLine";
 import SvgIcon from "../SvgIcon";
 
@@ -20,8 +20,8 @@ const NowText = styled.span`
 `;
 
 const HomeDateSelector = () => {
-  const clickedMonth = useReactiveVar(nowMonth);
-  const clickedYear = useReactiveVar(nowYear);
+  const clickedMonth = useReactiveVar(displayMonth);
+  const clickedYear = useReactiveVar(displayYear);
   const sameThisYM = () => {
     if (
       clickedYear.year === new Date().getFullYear() &&
