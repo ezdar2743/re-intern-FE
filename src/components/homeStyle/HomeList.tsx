@@ -31,7 +31,7 @@ const List = styled.div<{ isActive: boolean }>`
     props.isActive ? props.theme.mainColor : props.theme.borderColor};
 `;
 const ListBox = styled.div`
-  height: 400px;
+  height: 100%;
   overflow-y: auto;
 `;
 
