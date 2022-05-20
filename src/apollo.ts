@@ -10,7 +10,7 @@ const TOKEN = "token";
 export const isLoggedInVar = makeVar(Boolean(localStorage.getItem(TOKEN)));
 export const displayMonth = makeVar({ month: new Date().getMonth() + 1 });
 export const displayYear = makeVar({ year: new Date().getFullYear() });
-
+export const openAddModalVar = makeVar(false);
 export const preMonth = () => {
   displayMonth({ month: displayMonth().month - 1 });
   if (displayMonth().month < 1) {
