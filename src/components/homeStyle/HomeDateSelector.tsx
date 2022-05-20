@@ -23,12 +23,10 @@ const HomeDateSelector = () => {
   const clickedMonth = useReactiveVar(displayMonth);
   const clickedYear = useReactiveVar(displayYear);
   const sameThisYM = () => {
-    if (
+    return (
       clickedYear.year === new Date().getFullYear() &&
       clickedMonth.month === new Date().getMonth() + 1
-    ) {
-      return true;
-    } else return false;
+    );
   };
   return (
     <>

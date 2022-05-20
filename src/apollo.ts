@@ -28,6 +28,7 @@ export const nextMonth = () => {
 export const logUserIn = (token: string) => {
   localStorage.setItem(TOKEN, token);
   isLoggedInVar(true);
+  window.location.reload();
 };
 export const logUserOut = () => {
   localStorage.removeItem(TOKEN);
