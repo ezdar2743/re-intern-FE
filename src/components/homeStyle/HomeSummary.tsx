@@ -115,7 +115,7 @@ const HomeSummary = ({ user }: Props) => {
       </TotalAmount>
       <AmountDevideBox>
         <Income>
-          <div>入ったお金</div>{" "}
+          <div>入ったお金</div>
           <span>
             {new Intl.NumberFormat("ja-JP", {
               style: "currency",
