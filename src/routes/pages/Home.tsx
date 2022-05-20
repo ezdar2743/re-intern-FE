@@ -1,9 +1,11 @@
 import { gql, useQuery, useReactiveVar } from "@apollo/client";
 import styled from "styled-components";
+import { openAddModalVar } from "../../apollo";
+import HomeAddFoam from "../../components/homeStyle/HomeAddFoam";
+import HomeAddFoamModal from "../../components/homeStyle/HomeAddFoamModal";
 import HomeDateSelector from "../../components/homeStyle/HomeDateSelector";
 import HomeList from "../../components/homeStyle/HomeList";
 import HomeSummary from "../../components/homeStyle/HomeSummary";
-
 const Container = styled.div`
   width: 90%;
   height: 100%;
@@ -64,17 +66,22 @@ export const CURRENT_USER = gql`
 
 const Home: React.FC = () => {
   const { data: loginUser } = useQuery(CURRENT_USER);
+  const clickedAdd = useReactiveVar(openAddModalVar);
   return (
-    <Container>
-      <InnerContainer>
-        <ContentBox>
-          <HomeDateSelector />
-          <HomeSummary user={loginUser?.currentUser?.name} />
-          <ThickDevide />
-          <HomeList />
-        </ContentBox>
-      </InnerContainer>
-    </Container>
+    <>
+      <Container>
+        <InnerContainer>
+          <ContentBox>
+            <HomeDateSelector />
+            <HomeSummary user={loginUser?.currentUser?.name} />
+            <ThickDevide />
+            <HomeList />
+            <HomeAddFoam />
+          </ContentBox>
+        </InnerContainer>
+      </Container>
+      {clickedAdd && <HomeAddFoamModal />}
+    </>
   );
 };
 
