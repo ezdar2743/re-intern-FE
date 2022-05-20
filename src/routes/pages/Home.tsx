@@ -60,6 +60,13 @@ export const CURRENT_USER = gql`
   query currentUser {
     currentUser {
       name
+      moneyLists {
+        amount
+        date
+        title
+        month
+        year
+      }
     }
   }
 `;

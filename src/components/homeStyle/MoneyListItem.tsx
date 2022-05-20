@@ -1,5 +1,8 @@
+import { gql, useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MoneyList } from "../../generated/graphql";
+import { VIEW_MONEY_QUERY } from "../../routes/pages/Home";
 
 const Container = styled.div`
   margin-left: 10px;
@@ -43,7 +46,23 @@ const Btn = styled.div`
   }
 `;
 
+const DELETE_MUTATION = gql`
+  mutation deleteMoney($id: Int!) {
+    deleteMoney(id: $id) {
+      ok
+      error
+    }
+  }
+`;
 const MoneyListItem = ({ title, amount, date, year, month, id }: MoneyList) => {
+  const [deleteMoney] = useMutation(DELETE_MUTATION);
+  const onDelete = () => {
+    deleteMoney({
+      variables: { id },
+      refetchQueries: [VIEW_MONEY_QUERY],
+    });
+  };
+
   return (
     <Container>
       <Date>{date}</Date>
@@ -62,7 +81,7 @@ const MoneyListItem = ({ title, amount, date, year, month, id }: MoneyList) => {
                 }).format(amount)}
           </Don>
 
-          <Btn>
+          <Btn onClick={() => onDelete()}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
