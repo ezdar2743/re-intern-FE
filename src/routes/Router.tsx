@@ -30,6 +30,14 @@ const Router = () => {
           <Route path="/expend" element={<Expense />}></Route>
         </Route>
         {!isLoggedIn && <Route path="sign-up" element={<SignUp />} />}
+        <Route
+          path="/editList/:id"
+          element={
+            <HomeLayout>
+              <Home />
+            </HomeLayout>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

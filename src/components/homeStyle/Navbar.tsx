@@ -6,7 +6,7 @@ import SvgIcon from "../SvgIcon";
 const Container = styled.header`
   width: 100%;
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
-  background-color: ${(props) => props.theme.whiteColor};
+  background-color: white;
   padding: 18px 0px;
   display: flex;
   align-items: center;

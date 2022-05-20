@@ -1,9 +1,11 @@
 import { gql, useQuery, useReactiveVar } from "@apollo/client";
+import { useMatch } from "react-router-dom";
 import styled from "styled-components";
 import { openAddModalVar } from "../../apollo";
 import HomeAddFoam from "../../components/homeStyle/HomeAddFoam";
 import HomeAddFoamModal from "../../components/homeStyle/HomeAddFoamModal";
 import HomeDateSelector from "../../components/homeStyle/HomeDateSelector";
+import HomeEditModal from "../../components/homeStyle/HomeEditModal";
 import HomeList from "../../components/homeStyle/HomeList";
 import HomeSummary from "../../components/homeStyle/HomeSummary";
 const Container = styled.div`
@@ -60,6 +62,13 @@ export const CURRENT_USER = gql`
   query currentUser {
     currentUser {
       name
+      moneyLists {
+        amount
+        date
+        title
+        month
+        year
+      }
     }
   }
 `;
@@ -67,6 +76,8 @@ export const CURRENT_USER = gql`
 const Home: React.FC = () => {
   const { data: loginUser } = useQuery(CURRENT_USER);
   const clickedAdd = useReactiveVar(openAddModalVar);
+  const editMatch = useMatch("/editList/:id");
+  const editId = editMatch?.params.id;
   return (
     <>
       <Container>
@@ -81,6 +92,7 @@ const Home: React.FC = () => {
         </InnerContainer>
       </Container>
       {clickedAdd && <HomeAddFoamModal />}
+      {editMatch && <HomeEditModal id={Number(editId)} />}
     </>
   );
 };

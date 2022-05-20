@@ -39,7 +39,8 @@ const HomeList = () => {
   const allMatch = useMatch("/");
   const inMatch = useMatch("/income");
   const exMatch = useMatch("/expend");
-  let MoneyListSortedByDate = [];
+  const editMatch = useMatch("/editList/:id");
+  let moneyListSortedByDate = [];
   const clickedMonth = useReactiveVar(displayMonth);
   const clickedYear = useReactiveVar(displayYear);
   const { data: moneyInfo } = useQuery(VIEW_MONEY_QUERY, {
@@ -56,7 +57,7 @@ const HomeList = () => {
         (a: any, b: any) =>
           new Date(b.date).getTime() - new Date(a.date).getTime()
       );
-    MoneyListSortedByDate = sort;
+    moneyListSortedByDate = sort;
   }
 
   return (
@@ -74,25 +75,30 @@ const HomeList = () => {
       </BtnBox>
       <ListBox>
         <OnlyDevidedLine />
-        {allMatch && MoneyListSortedByDate
-          ? MoneyListSortedByDate.map((i: MoneyList) => (
+        {allMatch && moneyListSortedByDate
+          ? moneyListSortedByDate.map((i: MoneyList) => (
+              <MoneyListItem key={i.id} {...i} />
+            ))
+          : null}
+        {editMatch && moneyListSortedByDate
+          ? moneyListSortedByDate.map((i: MoneyList) => (
               <MoneyListItem key={i.id} {...i} />
             ))
           : null}
 
-        {inMatch && MoneyListSortedByDate
-          ? MoneyListSortedByDate.filter((i: MoneyList) => i.amount > 0).map(
-              (data: MoneyList) => (
+        {inMatch && moneyListSortedByDate
+          ? moneyListSortedByDate
+              .filter((i: MoneyList) => i.amount > 0)
+              .map((data: MoneyList) => (
                 <MoneyListItem key={data.id} {...data}></MoneyListItem>
-              )
-            )
+              ))
           : null}
-        {exMatch && MoneyListSortedByDate
-          ? MoneyListSortedByDate.filter((i: MoneyList) => i.amount < 0).map(
-              (data: MoneyList) => (
+        {exMatch && moneyListSortedByDate
+          ? moneyListSortedByDate
+              .filter((i: MoneyList) => i.amount < 0)
+              .map((data: MoneyList) => (
                 <MoneyListItem key={data.id} {...data}></MoneyListItem>
-              )
-            )
+              ))
           : null}
       </ListBox>
     </Wrapper>

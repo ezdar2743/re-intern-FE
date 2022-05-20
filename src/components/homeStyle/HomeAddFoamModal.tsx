@@ -5,6 +5,8 @@ import { useState } from "react";
 import AuthBtn from "../authStyle/AuthBtn";
 import { closeModal } from "../../apollo";
 import { AnimatePresence, motion } from "framer-motion";
+import { gql, useMutation } from "@apollo/client";
+import { VIEW_MONEY_QUERY } from "../../routes/pages/Home";
 
 const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
@@ -122,21 +124,56 @@ type Data = {
   day: number;
   amount: number;
 };
+
+const CREATE_MUTATION = gql`
+  mutation createMoney(
+    $amount: Int!
+    $title: String!
+    $date: String!
+    $year: Int!
+    $month: Int!
+  ) {
+    createMoney(
+      amount: $amount
+      title: $title
+      date: $date
+      year: $year
+      month: $month
+    ) {
+      ok
+      error
+    }
+  }
+`;
+
 const HomeAddFoamModal = () => {
   const { register, handleSubmit } = useForm<Data>();
   const [plus, setPlus] = useState(true);
+  const [createMoney, { loading }] = useMutation(CREATE_MUTATION);
   const clickedPlus = () => {
     setPlus(true);
   };
   const clickedMinus = () => {
     setPlus(false);
   };
+
   const onValid = (data: Data) => {
     let { year, month, day, title, amount } = data;
     if (!plus) amount *= -1;
     const date = `${year}-${month.toString().padStart(2, "0")}-${day
       .toString()
-      .padStart(2, "0")}}`;
+      .padStart(2, "0")}`;
+    createMoney({
+      variables: {
+        title,
+        date,
+        amount: Number(amount),
+        year: Number(year),
+        month: Number(month),
+      },
+      refetchQueries: [VIEW_MONEY_QUERY],
+    });
+    closeModal();
   };
 
   return (
@@ -149,7 +186,7 @@ const HomeAddFoamModal = () => {
         >
           <Exit onClick={() => closeModal()}>とじる</Exit>
           <Header>追加する！</Header>
-          <Form onSubmit={handleSubmit(() => onValid)}>
+          <Form onSubmit={handleSubmit(onValid)}>
             <Label htmlFor="title">Content</Label>
             <Input
               placeholder="例:給料"
@@ -160,15 +197,15 @@ const HomeAddFoamModal = () => {
             <Label htmlFor="year">Date</Label>
             <DateBox>
               <DateInput
-                {...register("year", { required: true })}
+                {...register("year", { required: true, max: 2023 })}
                 placeholder="yyyy "
               ></DateInput>
               <DateInput
-                {...register("month", { required: true })}
+                {...register("month", { required: true, max: 12, min: 1 })}
                 placeholder="mm"
               ></DateInput>
               <DateInput
-                {...register("day", { required: true })}
+                {...register("day", { required: true, max: 31, min: 1 })}
                 placeholder="dd"
               ></DateInput>
             </DateBox>
