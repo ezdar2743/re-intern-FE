@@ -5,7 +5,7 @@ import { displayMonth, displayYear } from "../../apollo";
 import { MoneyList } from "../../generated/graphql";
 import { VIEW_MONEY_QUERY } from "../../routes/pages/Home";
 import OnlyDevidedLine from "../OnlyDevidedLine";
-import HomeMoneyList from "./HomeMoneyList";
+import MoneyListItem from "./MoneyListItem";
 
 const Wrapper = styled.div`
   border-radius: 10px;
@@ -39,7 +39,7 @@ const HomeList = () => {
   const allMatch = useMatch("/");
   const inMatch = useMatch("/income");
   const exMatch = useMatch("/expend");
-  let sortDate = [];
+  let MoneyListSortedByDate = [];
   const clickedMonth = useReactiveVar(displayMonth);
   const clickedYear = useReactiveVar(displayYear);
   const { data: moneyInfo } = useQuery(VIEW_MONEY_QUERY, {
@@ -56,7 +56,7 @@ const HomeList = () => {
         (a: any, b: any) =>
           new Date(b.date).getTime() - new Date(a.date).getTime()
       );
-    sortDate = sort;
+    MoneyListSortedByDate = sort;
   }
 
   return (
@@ -74,23 +74,25 @@ const HomeList = () => {
       </BtnBox>
       <ListBox>
         <OnlyDevidedLine />
-        {allMatch && sortDate
-          ? sortDate.map((i: MoneyList) => <HomeMoneyList key={i.id} {...i} />)
+        {allMatch && MoneyListSortedByDate
+          ? MoneyListSortedByDate.map((i: MoneyList) => (
+              <MoneyListItem key={i.id} {...i} />
+            ))
           : null}
 
-        {inMatch && sortDate
-          ? sortDate
-              .filter((i: MoneyList) => i.amount > 0)
-              .map((data: MoneyList) => (
-                <HomeMoneyList key={data.id} {...data}></HomeMoneyList>
-              ))
+        {inMatch && MoneyListSortedByDate
+          ? MoneyListSortedByDate.filter((i: MoneyList) => i.amount > 0).map(
+              (data: MoneyList) => (
+                <MoneyListItem key={data.id} {...data}></MoneyListItem>
+              )
+            )
           : null}
-        {exMatch && sortDate
-          ? sortDate
-              .filter((i: MoneyList) => i.amount < 0)
-              .map((data: MoneyList) => (
-                <HomeMoneyList key={data.id} {...data}></HomeMoneyList>
-              ))
+        {exMatch && MoneyListSortedByDate
+          ? MoneyListSortedByDate.filter((i: MoneyList) => i.amount < 0).map(
+              (data: MoneyList) => (
+                <MoneyListItem key={data.id} {...data}></MoneyListItem>
+              )
+            )
           : null}
       </ListBox>
     </Wrapper>

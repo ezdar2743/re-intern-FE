@@ -43,7 +43,7 @@ const Btn = styled.div`
   }
 `;
 
-const HomeMoneyList = ({ title, amount, date, year, month, id }: MoneyList) => {
+const MoneyListItem = ({ title, amount, date, year, month, id }: MoneyList) => {
   return (
     <Container>
       <Date>{date}</Date>
@@ -94,4 +94,4 @@ const HomeMoneyList = ({ title, amount, date, year, month, id }: MoneyList) => {
   );
 };
 
-export default HomeMoneyList;
+export default MoneyListItem;
