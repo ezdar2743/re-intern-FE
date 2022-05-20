@@ -39,6 +39,7 @@ const HomeList = () => {
   const allMatch = useMatch("/");
   const inMatch = useMatch("/income");
   const exMatch = useMatch("/expend");
+  const editMatch = useMatch("/editList/:id");
   let MoneyListSortedByDate = [];
   const clickedMonth = useReactiveVar(displayMonth);
   const clickedYear = useReactiveVar(displayYear);
@@ -75,6 +76,11 @@ const HomeList = () => {
       <ListBox>
         <OnlyDevidedLine />
         {allMatch && MoneyListSortedByDate
+          ? MoneyListSortedByDate.map((i: MoneyList) => (
+              <MoneyListItem key={i.id} {...i} />
+            ))
+          : null}
+        {editMatch && MoneyListSortedByDate
           ? MoneyListSortedByDate.map((i: MoneyList) => (
               <MoneyListItem key={i.id} {...i} />
             ))

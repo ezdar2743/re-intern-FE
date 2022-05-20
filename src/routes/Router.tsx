@@ -31,6 +31,14 @@ const Router = () => {
         </Route>
         {!isLoggedIn && <Route path="sign-up" element={<SignUp />} />}
         <Route path="*" element={<NotFound />} />
+        <Route
+          path="/editList/:id"
+          element={
+            <HomeLayout>
+              <Home />
+            </HomeLayout>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
