@@ -52,8 +52,14 @@ const MoneyListItem = ({ title, amount, date, year, month, id }: MoneyList) => {
         <Box>
           <Don money={amount}>
             {amount > 0
-              ? `+${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
-              : amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              ? `+${new Intl.NumberFormat("ja-JP", {
+                  style: "currency",
+                  currency: "JPY",
+                }).format(amount)}`
+              : new Intl.NumberFormat("ja-JP", {
+                  style: "currency",
+                  currency: "JPY",
+                }).format(amount)}
           </Don>
 
           <Btn>
