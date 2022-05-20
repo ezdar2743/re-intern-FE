@@ -1,6 +1,6 @@
 import { gql, useQuery, useReactiveVar } from "@apollo/client";
 import styled from "styled-components";
-import { nextMonth, displayMonth, displayYear, preMonth } from "../../apollo";
+import { displayMonth, displayYear } from "../../apollo";
 import HomeDateSelector from "../../components/homeStyle/HomeDateSelector";
 import HomeSummary from "../../components/homeStyle/HomeSummary";
 

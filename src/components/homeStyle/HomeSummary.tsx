@@ -1,6 +1,6 @@
 import { useQuery, useReactiveVar } from "@apollo/client";
 import styled from "styled-components";
-import { nowMonth, nowYear } from "../../apollo";
+import { displayMonth, displayYear } from "../../apollo";
 import { MoneyList } from "../../generated/graphql";
 import { VIEW_MONEY_QUERY } from "../../routes/pages/Home";
 
@@ -77,8 +77,8 @@ type Props = {
   user: string;
 };
 const HomeSummary = ({ user }: Props) => {
-  const clickedMonth = useReactiveVar(nowMonth);
-  const clickedYear = useReactiveVar(nowYear);
+  const clickedMonth = useReactiveVar(displayMonth);
+  const clickedYear = useReactiveVar(displayYear);
   const { data: moneyInfo } = useQuery(VIEW_MONEY_QUERY, {
     variables: {
       year: clickedYear.year,
