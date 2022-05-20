@@ -43,7 +43,7 @@ export const closeModal = () => {
 };
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000",
+  uri: process.env.NODE_ENV === "productrion" ? "" : "http://localhost:4000",
 });
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem(TOKEN);
