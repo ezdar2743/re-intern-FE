@@ -3,7 +3,7 @@ import Input from "../Input";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import AuthBtn from "../authStyle/AuthBtn";
-import { confirmAdd } from "../../apollo";
+import { closeModal } from "../../apollo";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Container = styled.div`
@@ -147,7 +147,7 @@ const HomeAddFoamModal = () => {
           animate={{ opacity: 1, transition: { delay: 0.1 } }}
           exit={{ opacity: 0 }}
         >
-          <Exit onClick={() => confirmAdd()}>とじる</Exit>
+          <Exit onClick={() => closeModal()}>とじる</Exit>
           <Header>追加する！</Header>
           <Form onSubmit={handleSubmit(() => onValid)}>
             <Label htmlFor="title">Content</Label>

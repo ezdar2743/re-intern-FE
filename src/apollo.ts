@@ -35,10 +35,10 @@ export const logUserOut = () => {
   isLoggedInVar(false);
 };
 
-export const addClicked = () => {
+export const openModal = () => {
   openAddModalVar(true);
 };
-export const confirmAdd = () => {
+export const closeModal = () => {
   openAddModalVar(false);
 };
 

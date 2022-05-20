@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { addClicked } from "../../apollo";
+import { openModal } from "../../apollo";
 
 const Container = styled.div`
   display: flex;
@@ -41,7 +41,7 @@ const Text = styled.h1`
 const HomeAddFoam = () => {
   return (
     <Container>
-      <Boader onClick={() => addClicked()}>
+      <Boader onClick={() => openModal()}>
         <AddIcon
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"
