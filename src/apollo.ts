@@ -44,7 +44,7 @@ export const closeModal = () => {
 
 const httpLink = createHttpLink({
   uri:
-    process.env.NODE_ENV === "productrion"
+    process.env.NODE_ENV === "production"
       ? "https://mf-intern-server.herokuapp.com/"
       : "http://localhost:4000",
 });
