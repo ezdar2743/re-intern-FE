@@ -1,12 +1,12 @@
 import { gql, useQuery, useReactiveVar } from "@apollo/client";
 import styled from "styled-components";
-import { displayMonth, displayYear } from "../../apollo";
 import HomeDateSelector from "../../components/homeStyle/HomeDateSelector";
+import HomeList from "../../components/homeStyle/HomeList";
 import HomeSummary from "../../components/homeStyle/HomeSummary";
 
 const Container = styled.div`
   width: 90%;
-  height: 100vh;
+  height: 100%;
   border-radius: 35px;
   background-color: #f5f6fa;
   box-shadow: 8px 8px 40px rgba(143, 143, 150, 0.55),
@@ -43,6 +43,7 @@ const ThickDevide = styled.div`
   background-color: ${(props) => props.theme.borderColor};
   height: 3px;
 `;
+
 export const VIEW_MONEY_QUERY = gql`
   query viewMoney($year: Int!, $month: Int) {
     viewMoney(year: $year, month: $month) {
@@ -56,24 +57,13 @@ export const VIEW_MONEY_QUERY = gql`
 export const CURRENT_USER = gql`
   query currentUser {
     currentUser {
-      loginId
       name
-      email
     }
   }
 `;
 
 const Home: React.FC = () => {
-  const clickedMonth = useReactiveVar(displayMonth);
-  const clickedYear = useReactiveVar(displayYear);
   const { data: loginUser } = useQuery(CURRENT_USER);
-  const { data: moneyInfo } = useQuery(VIEW_MONEY_QUERY, {
-    variables: {
-      year: clickedYear.year,
-      month: clickedMonth.month,
-    },
-  });
-
   return (
     <Container>
       <InnerContainer>
@@ -81,6 +71,7 @@ const Home: React.FC = () => {
           <HomeDateSelector />
           <HomeSummary user={loginUser?.currentUser?.name} />
           <ThickDevide />
+          <HomeList />
         </ContentBox>
       </InnerContainer>
     </Container>
