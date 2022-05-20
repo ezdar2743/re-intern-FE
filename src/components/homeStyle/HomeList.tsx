@@ -1,7 +1,7 @@
 import { useQuery, useReactiveVar } from "@apollo/client";
 import { Link, useMatch } from "react-router-dom";
 import styled from "styled-components";
-import { nowMonth, nowYear } from "../../apollo";
+import { displayMonth, displayYear } from "../../apollo";
 import { MoneyList } from "../../generated/graphql";
 import { VIEW_MONEY_QUERY } from "../../routes/pages/Home";
 import OnlyDevidedLine from "../OnlyDevidedLine";
@@ -40,8 +40,8 @@ const HomeList = () => {
   const inMatch = useMatch("/income");
   const exMatch = useMatch("/expend");
   let sortDate = [];
-  const clickedMonth = useReactiveVar(nowMonth);
-  const clickedYear = useReactiveVar(nowYear);
+  const clickedMonth = useReactiveVar(displayMonth);
+  const clickedYear = useReactiveVar(displayYear);
   const { data: moneyInfo } = useQuery(VIEW_MONEY_QUERY, {
     variables: {
       year: clickedYear.year,

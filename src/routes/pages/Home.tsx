@@ -1,6 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useReactiveVar } from "@apollo/client";
 import styled from "styled-components";
-import { displayMonth, displayYear } from "../../apollo";
 import HomeDateSelector from "../../components/homeStyle/HomeDateSelector";
 import HomeList from "../../components/homeStyle/HomeList";
 import HomeSummary from "../../components/homeStyle/HomeSummary";
@@ -64,8 +63,6 @@ export const CURRENT_USER = gql`
 `;
 
 const Home: React.FC = () => {
-  const clickedMonth = useReactiveVar(displayMonth);
-  const clickedYear = useReactiveVar(displayYear);
   const { data: loginUser } = useQuery(CURRENT_USER);
   return (
     <Container>
