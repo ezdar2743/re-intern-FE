@@ -2,6 +2,7 @@ import { useReactiveVar } from "@apollo/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { isLoggedInVar } from "../apollo";
 import HomeLayout from "../components/homeStyle/HomeLayout";
+import Calendar from "./pages/Calendar";
 import Expense from "./pages/Expense";
 import Home from "./pages/Home";
 import Income from "./pages/Income";
@@ -35,6 +36,14 @@ const Router = () => {
           element={
             <HomeLayout>
               <Home />
+            </HomeLayout>
+          }
+        />
+        <Route
+          path="/calendar"
+          element={
+            <HomeLayout>
+              <Calendar />
             </HomeLayout>
           }
         />
