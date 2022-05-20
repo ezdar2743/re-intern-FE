@@ -107,22 +107,31 @@ const HomeSummary = ({ user }: Props) => {
       <MoneyImg src="https://cdn.pixabay.com/photo/2021/06/27/12/40/money-6368673_960_720.png"></MoneyImg>
       <WelcomeText>こんにちは。{user}様！</WelcomeText>
       <WelcomeText>今までの収支を確認してください。</WelcomeText>
-      <TotalAmount amount={total}>{`￥${total
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}</TotalAmount>
+      <TotalAmount amount={total}>
+        {new Intl.NumberFormat("ja-JP", {
+          style: "currency",
+          currency: "JPY",
+        }).format(total)}
+      </TotalAmount>
       <AmountDevideBox>
         <Income>
           <div>入ったお金</div>{" "}
-          <span>{`￥${income
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}</span>
+          <span>
+            {new Intl.NumberFormat("ja-JP", {
+              style: "currency",
+              currency: "JPY",
+            }).format(income)}
+          </span>
         </Income>
         <ColDevidedLine></ColDevidedLine>
         <Expend>
           <div>出たお金</div>
-          <span>{`￥${expend
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}</span>
+          <span>
+            {new Intl.NumberFormat("ja-JP", {
+              style: "currency",
+              currency: "JPY",
+            }).format(expend)}
+          </span>
         </Expend>
       </AmountDevideBox>
     </SummaryBox>
