@@ -3,21 +3,21 @@ import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client";
 const TOKEN = "token";
 
 export const isLoggedInVar = makeVar(Boolean(localStorage.getItem(TOKEN)));
-export const nowMonth = makeVar({ month: new Date().getMonth() + 1 });
-export const nowYear = makeVar({ year: new Date().getFullYear() });
+export const displayMonth = makeVar({ month: new Date().getMonth() + 1 });
+export const displayYear = makeVar({ year: new Date().getFullYear() });
 
 export const preMonth = () => {
-  nowMonth({ month: nowMonth().month - 1 });
-  if (nowMonth().month < 1) {
-    nowMonth({ month: 12 });
-    nowYear({ year: nowYear().year - 1 });
+  displayMonth({ month: displayMonth().month - 1 });
+  if (displayMonth().month < 1) {
+    displayMonth({ month: 12 });
+    displayYear({ year: displayYear().year - 1 });
   }
 };
 export const nextMonth = () => {
-  nowMonth({ month: nowMonth().month + 1 });
-  if (nowMonth().month > 12) {
-    nowMonth({ month: 1 });
-    nowYear({ year: nowYear().year + 1 });
+  displayMonth({ month: displayMonth().month + 1 });
+  if (displayMonth().month > 12) {
+    displayMonth({ month: 1 });
+    displayYear({ year: displayYear().year + 1 });
   }
 };
 export const logUserIn = (token: string) => {
