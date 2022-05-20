@@ -16,13 +16,13 @@ const Box = styled(AuthBox)`
     }
   }
 `;
-interface IProps {
+type Props = {
   text: string;
   link: string;
   linkName: string;
-}
+};
 
-const AuthbottomBox = ({ text, link, linkName }: IProps) => {
+const AuthbottomBox = ({ text, link, linkName }: Props) => {
   return (
     <Box>
       <span>

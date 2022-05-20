@@ -7,11 +7,11 @@ const LoginText = styled.div`
   font-size: 16px;
   padding: 5px 5px 20px 5px;
 `;
-interface IProps {
+type Props = {
   text: string;
-}
+};
 
-const OtherLogin = ({ text }: IProps) => {
+const OtherLogin = ({ text }: Props) => {
   return (
     <LoginText>
       <span>{text}</span>

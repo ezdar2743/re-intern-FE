@@ -1,7 +1,7 @@
-import { useReactiveVar } from "@apollo/client";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { isLoggedInVar, logUserOut } from "../../apollo";
+import { logUserOut } from "../../apollo";
+import SvgIcon from "../SvgIcon";
 
 const Container = styled.header`
   width: 100%;
@@ -28,24 +28,15 @@ const Logo = styled.svg`
   width: 200px;
   height: 30px;
 `;
-const Icon = styled.svg`
-  cursor: pointer;
-  width: 70px;
-  height: 30px;
-  color: ${(props) => props.theme.mainColor};
-  transition: 1ms ease-in-out;
-  &:hover {
-    transform: scale(1.1);
-    color: #3276bc;
-  }
-`;
+
 const Button = styled.button`
   background-color: ${(props) => props.theme.mainColor};
   border-radius: 4px;
-  font-size: 12px;
-  padding: 3px 6px;
+  font-size: 14px;
+  padding: 6px 8px;
   color: white;
   border: none;
+  margin-left: 20px;
   cursor: pointer;
   transition: 1ms ease-in-out;
   &:hover {
@@ -53,8 +44,6 @@ const Button = styled.button`
   }
 `;
 const Navbar = () => {
-  const isLoggedIn = useReactiveVar(isLoggedInVar);
-
   return (
     <Container>
       <Wrapper>
@@ -72,7 +61,25 @@ const Navbar = () => {
         <Col>
           <>
             <Link to="/">
-              <Icon
+              <SvgIcon>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                  />
+                </svg>
+              </SvgIcon>
+            </Link>
+            <SvgIcon>
+              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
                 fill="none"
@@ -83,38 +90,11 @@ const Navbar = () => {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                 />
-              </Icon>
-            </Link>
-            <Icon
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </Icon>
-            <Icon
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </Icon>
+              </svg>
+            </SvgIcon>
+
             <Button onClick={logUserOut}>ログアウト</Button>
           </>
         </Col>

@@ -13,11 +13,11 @@ const Wrapper = styled.div`
   max-width: 600px;
   width: 100%;
 `;
-interface IProps {
+type Props = {
   children: ReactNode;
-}
+};
 
-const AuthLayout = ({ children }: IProps) => {
+const AuthLayout = ({ children }: Props) => {
   return (
     <AuthContainer>
       <Wrapper>{children}</Wrapper>
