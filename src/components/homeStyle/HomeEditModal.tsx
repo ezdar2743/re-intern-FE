@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { VIEW_MONEY_QUERY } from "../../routes/pages/Home";
+import { CURRENT_USER, VIEW_MONEY_QUERY } from "../../routes/pages/Home";
 
 const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
@@ -174,7 +174,7 @@ const HomeEditModal = ({ id }: Props) => {
         month: Number(month),
         id: Number(id),
       },
-      refetchQueries: [VIEW_MONEY_QUERY],
+      refetchQueries: [VIEW_MONEY_QUERY, CURRENT_USER],
     });
     confirmEdit();
   };

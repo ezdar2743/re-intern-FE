@@ -63,6 +63,7 @@ export const CURRENT_USER = gql`
     currentUser {
       name
       moneyLists {
+        id
         amount
         date
         title

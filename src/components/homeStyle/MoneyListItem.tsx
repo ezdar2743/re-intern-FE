@@ -2,7 +2,7 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MoneyList } from "../../generated/graphql";
-import { VIEW_MONEY_QUERY } from "../../routes/pages/Home";
+import { CURRENT_USER, VIEW_MONEY_QUERY } from "../../routes/pages/Home";
 import { VIEW_EDIT_LIST_QUERY } from "./HomeEditModal";
 
 const Container = styled.div`
@@ -61,7 +61,7 @@ const MoneyListItem = ({ title, amount, date, year, month, id }: MoneyList) => {
   const onDelete = () => {
     deleteMoney({
       variables: { id },
-      refetchQueries: [VIEW_MONEY_QUERY],
+      refetchQueries: [VIEW_MONEY_QUERY, CURRENT_USER],
     });
   };
 
